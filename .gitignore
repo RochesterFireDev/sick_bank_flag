@@ -1,0 +1,20 @@
+# Ignore Jupyter Notebooks
+*.ipynb
+
+# Ignore local config / editor / cache
+__pycache__/
+*.pyc
+*.pyo
+*.swp
+*.bak
+.vscode/
+
+# Ignore data/log files
+*.json
+*.csv
+*.log
+*.xlsx
+*.tmp
+
+# Ignore scratch/test scripts
+test.py

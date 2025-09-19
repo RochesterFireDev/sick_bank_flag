@@ -70,7 +70,7 @@ def send_email(body, file_path, test=True):
 
     if test:
         to_emails=["willis.sontheimer@cityofrochester.gov"
-                  # ,"Daniel.Curran@cityofrochester.gov"
+                   ,"Daniel.Curran@cityofrochester.gov"
                    ]
     else:
         to_emails = ["Erica.Torres@CityofRochester.Gov"

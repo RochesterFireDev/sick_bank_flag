@@ -14,6 +14,7 @@ import pandas as pd
 from datetime import datetime
 from sql import get_data
 import os
+import numpy as np
 from helpers import load_flags, save_flags, send_email
 
 df = get_data()
@@ -33,19 +34,23 @@ grouped_data = (
     .reset_index()
 )
 
-grouped_data = grouped_data.sort_values(by='Shift_Hours', ascending=False).reset_index(drop=True)
 grouped_data['Shift_Hours'] = (
     pd.to_numeric(grouped_data['Shift_Hours'], errors='coerce')
       .fillna(0)
       .round(2)
 )
 
+cutoff = np.where(grouped_data["YearsOfService"] >= 5, 1104, 552)
+grouped_data["Remaining Hours"]  = (cutoff - grouped_data["Shift_Hours"]).round(2)
+grouped_data = grouped_data.sort_values("Remaining Hours", ascending=True)
+
+
 if test:
     output_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
     os.makedirs(output_folder, exist_ok=True)
     file_path = os.path.join(output_folder, "Sick_and_Injured.xlsx")
 else:
-    file_path = r"\\cor.local\Fire\Department\Admin Projects\Payroll\Sick_and_Injured.xlsx"
+    file_path = r"\\cor.local\Fire\Department\Admin Projects\Payroll\Sick_and_Injured_Report\Sick_and_Injured.xlsx"
 
 wb = Workbook()
 ws = wb.active
@@ -71,10 +76,6 @@ red_flags = load_flags(red_path)
 new_yellows = []
 new_reds = []
 
-if "Remaining Hours" not in headers:
-    headers.append("Remaining Hours")
-    ws.cell(row=3, column=len(headers), value="Remaining Hours")
- 
 if "Date Yellow" not in headers:
     headers.append("Date Yellow")
     ws.cell(row=3, column=len(headers), value="Date Yellow")
@@ -99,9 +100,7 @@ for row_num, row_data in enumerate(grouped_data.itertuples(index=False), 4):
         if headers[col_num - 1] == "Shift_Hours":
             cell.number_format = "0.00"
             total_hours = value
-            cutoff = 1104 if years_of_service >= 5 else 552
-            remaining_hours = round(cutoff - total_hours, 2)
-            cell_rem = ws.cell(row=row_num, column=headers.index("Remaining Hours") + 1, value=remaining_hours)
+            cell_rem = ws.cell(row=row_num, column=headers.index("Remaining Hours") + 1)
             cell_rem.number_format = "0.00"
 
             # --- YELLOW condition ---
@@ -145,6 +144,7 @@ for row_num, row_data in enumerate(grouped_data.itertuples(index=False), 4):
       
         # Center align the cell content
         cell.alignment = Alignment(horizontal='left')
+
 for col_num, header in enumerate(headers, 1):
     col_letter = get_column_letter(col_num)
     ws[f"{col_letter}3"] = header
@@ -183,6 +183,7 @@ test_mode_text = ("""
 <b>* TEST *</b>
 <p>Hi Dan, I think this report is ready ship.  Please take a look at the attached report and also take a look at the documentation in the github repo:</p>
 <p>https://github.com/RochesterFireDev/sick_bank_flag</p>
+<p>-------------------------------------</p>                  
 """ if test else "")
 
 body = f"""      
@@ -191,15 +192,16 @@ body = f"""
 
 <p>New members have been flagged for their sick-bank hours:</p>
 
-<p><b>YELLOW FLAGS</b> — The following members have approximately 240 hours (~10 working shifts) before going into a no pay status:</p>
+<p><b>YELLOW FLAGS</b>—The following members have approximately 240 hours (~10 working shifts) before going into a no pay status:</p>
 <p>{yellow_bullets}</p>
 
-<p><b>RED FLAGS</b> — The following members have exhausted allocated sick hours and could go into a no pay status:</p>
+<p><b>RED FLAGS</b>—The following members have exhausted allocated sick hours and could go into a no pay status:</p>
 <p>{red_bullets}</p>
 
 The updated sick and injured report is attached.  It can also be viewed here: 
-
-<p>G:\Admin Projects\Payroll\Sick and Injured Report</p>
+<a href="file:///G:/Admin%20Projects/Payroll/Sick_and_Injured_Report/">
+G:\\Admin Projects\\Payroll\\Sick_and_Injured_Report
+</a></p>
 
 <p>Rochester Fire Department</p>
 <p>(<i>This is an automated message</i>)</p>

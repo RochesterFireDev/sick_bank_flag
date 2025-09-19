@@ -14,7 +14,7 @@ def get_data():
         CASE WHEN v.schdtypeid IN (4, 7, 86,88) THEN 1 ELSE 0 END AS Missed_Flag
     FROM VWSCHDHIST v
     left join pers p on v.persid = p.persid
-    WHERE v.schdrankid NOT IN (2, 9, 11, 14, 16)
+    WHERE v.schdrankid NOT IN (2, 9, 11, 14, 15, 16, 17)
         AND v.datetimestart BETWEEN DATEFROMPARTS(YEAR(GETDATE()), 1, 1) AND GETDATE()
         AND p.persstatid = 2
     ORDER BY v.perscode, v.datetimestart DESC;

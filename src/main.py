@@ -13,7 +13,6 @@ df = get_data()
 df = df[df['Missed_Flag'] ==  1]
 df['YearsOfService'] = pd.to_numeric(df['YearsOfService'], errors='coerce').fillna(0).astype(int)
 
-# Group by Employee_ID and compute the total missed flags
 grouped_data = (
     df.groupby('Employee_ID')
     .agg(
@@ -34,8 +33,6 @@ grouped_data['Shift_Hours'] = (
       .round(2)
 )
 
-grouped_data.to_csv("df.csv")
-# Directory to save the files
 if test:
     output_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
     os.makedirs(output_folder, exist_ok=True)
@@ -43,7 +40,6 @@ if test:
 else:
     file_path = r"\\cor.local\Fire\Department\Admin Projects\Payroll\Sick_and_Injured.xlsx"
 
-# Create a new workbook for each group
 wb = Workbook()
 ws = wb.active
 
@@ -54,7 +50,6 @@ timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 ws["B1"] = timestamp
 ws["B1"].font = Font(bold=True)
 
-# Add headers to the worksheet
 headers = list(grouped_data.columns)
 
 cache_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cache")
@@ -66,7 +61,6 @@ red_path    = os.path.join(cache_dir, "reds.json")
 yellow_flags = load_flags(yellow_path) 
 red_flags = load_flags(red_path) 
 
-# New lists for this run
 new_yellows = []
 new_reds = []
 

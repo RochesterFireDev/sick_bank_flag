@@ -1,3 +1,12 @@
+# IMPORTANT #
+# -------------------------------- #
+
+# Toggle for True to test, and False to ship
+test = True
+
+# IMPORTANT #
+# -------------------------------- #
+
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font, PatternFill, Alignment
@@ -6,8 +15,6 @@ from datetime import datetime
 from sql import get_data
 import os
 from helpers import load_flags, save_flags, send_email
-
-test = True
 
 df = get_data()
 df = df[df['Missed_Flag'] ==  1]

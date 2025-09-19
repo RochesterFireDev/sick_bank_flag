@@ -6,6 +6,7 @@
 
 ## Overview
 This report displays total hours missed due to sickness or injury for the calendar year for all uniformed members of the Rochester Fire Department.
+
 ---
 
 ## Sick or Injured – Definition

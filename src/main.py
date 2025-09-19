@@ -113,7 +113,6 @@ for row_num, row_data in enumerate(grouped_data.itertuples(index=False), 4):
                     )
                 rec = next((r for r in yellow_flags if r["employee_id"] == employee_id), None)
                 if rec:
-                    # Use the stored date as-is (even if it's None/blank)
                     ws.cell(row=row_num, column=headers.index("Date Yellow") + 1,
                             value=rec.get("date_yellow"))
                 else:
@@ -180,8 +179,9 @@ else:
     red_bullets = "&nbsp;&nbsp;&nbsp;• &nbsp;There are no red flags."
 
 test_mode_text = ("""
-<b>* TEST * Please review</b>
-<p>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</p>
+<b>* TEST *</b>
+<p>Hi Dan, I think this report is ready ship.  Please take a look at the attached report and also take a look at the documentation in the github repo:</p>
+<p>https://github.com/RochesterFireDev/sick_bank_flag</p>
 """ if test else "")
 
 body = f"""      

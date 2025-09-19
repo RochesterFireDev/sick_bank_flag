@@ -9,7 +9,15 @@ from email import encoders
 from datetime import datetime
 
 def load_flags(path):
-    """Return list[{'employee_id': int, 'name': str, 'date_yellow': str|None, 'date_red': str|None}]"""
+    """
+    Loads a json file, or creates an empty json file, to store data for members flagged (yellow or red) vfor their sick-leave bank 
+
+    Parameters:
+    path (type): path to the json files
+
+    Returns:
+    json: a json file containing flagged members    
+    """
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     try:
         with open(path, "r", encoding="utf-8") as f:
@@ -42,7 +50,19 @@ def save_flags(path, flags):
         json.dump(flags, f, indent=2)
 
 
-def send_email(body, file_path, test= True):
+def send_email(body, file_path, test=True):
+    """
+    Sends an email specifically for the sick and injured report payroll, case manager, and their chain of command. 
+
+    Parameters:
+    body (string): An html string of the email body text
+    file_path (str): the filepath of the sick_and_injured.xlsx report 
+    test (bool): If True, then it sends to developers and outputs report locally, if False, pipeline 
+                runs in production: sends to stakeholders and exports report to production folder.
+
+    Returns:
+    email: sends an email 
+    """
     SMTP_SERVER = "smtp.cor.local"
     SMTP_PORT = 25
     SMTP_USER = "rfdutilsvc@cityofrochester.gov"

@@ -1,4 +1,3 @@
-# README – Total Shifts Missed (Sick and Injured)
 
 **Report File:**  
 `Sick_and_Injured.xlsx`  
@@ -23,7 +22,7 @@ Sick or injured time is defined by these schedule type descriptions:
 ### Yellow Highlight
 Members are highlighted **yellow** when their **`Shift_Hours`** falls within these ranges:
 - **Years of service ≥ 5 years:** between **864** and **1104** hours (≈ 36–46 shifts)  
-- **Years of service < 5 years:** between **552** and **864** hours (≈ 23–36 shifts)  
+- **Years of service < 5 years:** between **312** and **552** hours (≈ 23–36 shifts)  
 
 ### Red Highlight
 Members are highlighted **red** when their **`Shift_Hours`** exceeds:
@@ -42,16 +41,11 @@ Members are highlighted **red** when their **`Shift_Hours`** exceeds:
     * CAR3, Executive Deputy Chief of Administration
 
 - **Category Definitions**  
-  - **Red:** Member exceeded allocated sick hours and could go into no-pay status.  
+  - **Red:** Member exhausted allocated sick hours and could go into no-pay status.  
   - **Yellow:** Member is within 10 working shifts (240 hours) of moving into no-pay status.  
 
 - **Additional Reporting Columns**  
-  - Remaining hours until no-pay.  
-  - "Went yellow" timestamp (date member first entered yellow category).  
-
-
----
-
-✅ This README reflects the reviewer’s notes:  
-- Conditions now based on **hours missed** (`Total_Hours_Missed`) instead of shifts.  
-- Numeric thresholds converted to hours using an assumed **24-hour shift length** (e.g., 1 shift = 24 hours).  
+  - `Shift Hours` - Total assigned shift hours member with a sick or injured schedule type. 
+  - `Remaining Hours` - Remaining hours until no-pay.  
+  - `Date Yellow` - Date when member first entered yellow category.  
+  - `Date Red` - Date when member first entered red category.

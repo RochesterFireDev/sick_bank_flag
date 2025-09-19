@@ -22,13 +22,13 @@ Sick or injured time is defined by these schedule type descriptions:
 
 ### Yellow Highlight
 Members are highlighted **yellow** when their **`Shift_Hours`** falls within these ranges:
-- **Years of service ≥ 5 years:** between **864** and **1104** hours (≈ 36–46 shifts)  
-- **Years of service < 5 years:** between **312** and **552** hours (≈ 23–36 shifts)  
+- **Years of service ≥ 5 years:** between **864** and **1103** hours 
+- **Years of service < 5 years:** between **312** and **551** hours  
 
 ### Red Highlight
 Members are highlighted **red** when their **`Shift_Hours`** exceeds:
-- **Years of service ≥ 5 years:** **> 1104 hours** (≈ 46 shifts)  
-- **Years of service < 5 years:** **> 552 hours** (≈ 23 shifts)  
+- **Years of service ≥ 5 years:** **≥ 1104 hours**   
+- **Years of service < 5 years:** **≥ 552 hours**   
 
 ---
 

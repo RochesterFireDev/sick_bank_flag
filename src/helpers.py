@@ -10,40 +10,24 @@ from datetime import datetime
 
 def load_flags(path):
     """
-    Loads a json file, or creates an empty json file, to store data for members flagged (yellow or red) vfor their sick-leave bank 
+    Loads a json file, or creates an empty json file, to store data for members flagged 
+    (yellow or red) for their sick-leave bank 
 
-    Parameters:
-    path (type): path to the json files
+    Args:
+        path (str): path to the json files
 
     Returns:
-    json: a json file containing flagged members    
-    """
+        list: a list of flagged members, or an empty list if none existed.
+    """    
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
     try:
         with open(path, "r", encoding="utf-8") as f:
-            data = json.load(f)
+            return json.load(f)
+
     except (FileNotFoundError, json.JSONDecodeError):
-        data = []
         with open(path, "w", encoding="utf-8") as f:
             json.dump([], f)
-
-    flags = []
-    for x in data:
-        if isinstance(x, dict):
-            emp  = int(x.get("employee_id"))
-            name = str(x.get("name", ""))
-            date_yellow = x.get("date_yellow")
-            date_red    = x.get("date_red")
-        else:  # legacy list of IDs
-            emp, name, date_yellow, date_red = int(x), "", None, None
-
-        flags.append({
-            "employee_id": emp,
-            "name": name,
-            "date_yellow": date_yellow,
-            "date_red": date_red
-        })
-    return flags
+        return []
 
 def save_flags(path, flags):
     with open(path, "w", encoding="utf-8") as f:
@@ -52,17 +36,15 @@ def save_flags(path, flags):
 
 def send_email(body, file_path, test=True):
     """
-    Sends an email specifically for the sick and injured report payroll, case manager, and their chain of command. 
+    Sends an email specifically for the sick and injured report payroll, 
+    case manager, and their chain of command. 
 
-    Parameters:
-    body (string): An html string of the email body text
-    file_path (str): the filepath of the sick_and_injured.xlsx report 
-    test (bool): If True, then it sends to developers and outputs report locally, if False, pipeline 
-                runs in production: sends to stakeholders and exports report to production folder.
-
-    Returns:
-    email: sends an email 
-    """
+    Args:
+        body (str): An html string of the email body text
+        file_path (str): the filepath of the sick_and_injured.xlsx report 
+        test (bool, optional): If True, then it sends to developers and outputs report locally, if False, pipeline 
+                runs in production: sends to stakeholders and exports report to production folder. Defaults to True.
+    """    
     SMTP_SERVER = "smtp.cor.local"
     SMTP_PORT = 25
     SMTP_USER = "rfdutilsvc@cityofrochester.gov"

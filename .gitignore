@@ -17,4 +17,4 @@ __pycache__/
 *.tmp
 
 # Ignore scratch/test scripts
-test.py
+*test.py

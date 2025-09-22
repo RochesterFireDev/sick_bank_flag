@@ -21,12 +21,12 @@ Sick or injured time is defined by these schedule type descriptions:
 ## Highlighting Rules
 
 ### Yellow Highlight
-Members are highlighted **yellow** when their **`Shift_Hours`** falls within these ranges:
+Member is within 10 working shifts (240 hours) of moving into no-pay status.  Highlighted **yellow** when their **`Shift_Hours`** falls within these ranges:
 - **Years of service ≥ 5 years:** between **864** and **1103** hours 
 - **Years of service < 5 years:** between **312** and **551** hours  
 
 ### Red Highlight
-Members are highlighted **red** when their **`Shift_Hours`** exceeds:
+Member exhausted allocated sick hours and could go into no-pay status. Highlighted **red** when their **`Shift_Hours`** exceeds:
 - **Years of service ≥ 5 years:** **≥ 1104 hours**   
 - **Years of service < 5 years:** **≥ 552 hours**   
 
@@ -40,11 +40,7 @@ Members are highlighted **red** when their **`Shift_Hours`** exceeds:
   - CAR2, Executive Deputy Chief of Operations
   - CAR3, Executive Deputy Chief of Administration
 
-- **Category Definitions**  
-  - **Red:** Member exhausted allocated sick hours and could go into no-pay status.  
-  - **Yellow:** Member is within 10 working shifts (240 hours) of moving into no-pay status.  
-
-- **Additional Reporting Columns**  
+## Additional Reporting Columns ##
   - `Shift Hours` - Total assigned shift hours member with a sick or injured schedule type. 
   - `Remaining Hours` - Remaining hours until no-pay.  
   - `Date Yellow` - Date when member first entered yellow category.  

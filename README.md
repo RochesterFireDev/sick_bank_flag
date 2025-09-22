@@ -34,11 +34,11 @@ Members are highlighted **red** when their **`Shift_Hours`** exceeds:
 
 ## Automated Email Alerts ## 
   When a member enters a red or yellow category and automated email is sent to: 
-    * Case Manager
-    * rfd-payroll@CityofRochester.Gov
-    * Payroll Supervisor
-    * CAR2, Executive Deputy Chief of Operations
-    * CAR3, Executive Deputy Chief of Administration
+  - `Case Manager`
+  - `rfd-payroll@CityofRochester.Gov`
+  - `Payroll Supervisor`
+  - `CAR2, Executive Deputy Chief of Operations`
+  - `CAR3, Executive Deputy Chief of Administration`
 
 - **Category Definitions**  
   - **Red:** Member exhausted allocated sick hours and could go into no-pay status.  

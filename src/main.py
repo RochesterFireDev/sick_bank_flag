@@ -44,7 +44,6 @@ cutoff = np.where(grouped_data["YearsOfService"] >= 5, 1104, 552)
 grouped_data["Remaining Hours"]  = (cutoff - grouped_data["Shift_Hours"]).round(2)
 grouped_data = grouped_data.sort_values("Remaining Hours", ascending=True)
 
-
 if test:
     output_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
     os.makedirs(output_folder, exist_ok=True)
@@ -83,7 +82,6 @@ if "Date Yellow" not in headers:
 if "Date Red" not in headers:
     headers.append("Date Red")
     ws.cell(row=3, column=len(headers), value="Date Red")
-
 
 # Write the result data into the worksheet, starting from row 4
 for row_num, row_data in enumerate(grouped_data.itertuples(index=False), 4):
@@ -181,7 +179,7 @@ else:
 
 test_mode_text = ("""
 <b>* TEST *</b>
-<p>Hi Dan, I think this report is ready ship.  Please take a look at the attached report and also take a look at the documentation in the github repo:</p>
+<p>Hi Tracy and Chief Dobbertin, I've finished the solution to display =Please take a look at the attached report and also take a look at the documentation in the github repo:</p>
 <p>https://github.com/RochesterFireDev/sick_bank_flag</p>
 <p>-------------------------------------</p>                  
 """ if test else "")

@@ -32,8 +32,7 @@ Members are highlighted **red** when their **`Shift_Hours`** exceeds:
 
 ---
 
-## New Features
-- **Automated Email Alerts**  
+## Automated Email Alerts ## 
   When a member enters a red or yellow category and automated email is sent to: 
     * Case Manager
     * rfd-payroll@CityofRochester.Gov

@@ -11,7 +11,7 @@ from datetime import datetime
 def load_flags(path):
     """
     Loads a json file, or creates an empty json file, to store data for members flagged 
-    (yellow or red) for their sick-leave bank 
+    (yellow or red) for their sick-leave bank.  All flagged members are cleared from the list on January 1st. 
 
     Args:
         path (str): path to the json files
@@ -20,6 +20,10 @@ def load_flags(path):
         list: a list of flagged members, or an empty list if none existed.
     """    
     os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+    today=datetime.today()
+    if today.month == 1 and today.day == 1:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump([],f)
     try:
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -52,7 +56,7 @@ def send_email(body, file_path, test=True):
 
     if test:
         to_emails=["willis.sontheimer@cityofrochester.gov"
-                   ,"Daniel.Curran@cityofrochester.gov"
+                  # ,"Daniel.Curran@cityofrochester.gov"
                    ]
     else:
         to_emails = ["Erica.Torres@CityofRochester.Gov"

@@ -2,7 +2,7 @@
 # -------------------------------- #
 
 # Toggle for True to test, and False to ship
-test = True
+test = False
 
 # IMPORTANT #
 # -------------------------------- #

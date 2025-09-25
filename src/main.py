@@ -204,4 +204,17 @@ G:\\Admin Projects\\Payroll\\Sick_and_Injured_Report
 <p>Rochester Fire Department</p>
 <p>(<i>This is an automated message</i>)</p>
 """
-send_email(file_path=file_path, body = body, test=test)
+if new_reds or new_yellows:
+    if new_reds and new_yellows:
+        print("[FLAG] Both red and yellow flag groups have changes")
+        print(f"[NEW YELLOWS]: {new_yellows}")
+        print(f"[NEW REDS]: {new_reds}")
+    elif new_reds:
+        print("[FLAG] There has been a change to the red flag group")
+        print(f"[NEW REDS]: {new_reds}")
+    elif new_yellows:
+        print("[FLAG] There has been a change to the yellow flag group")
+        print(f"[NEW YELLOWS]: {new_yellows}")
+    send_email(file_path=file_path, body = body, test=test)
+else: 
+    print("[SCRIPT COMPLETE] There were no flags")

@@ -10,7 +10,7 @@ if not exist %LOGDIR% (
 )
 
 :: Start log with timestamp and user
-echo ========================== > %LOG%
+echo ========================== >> %LOG%
 echo Start: %date% %time% >> %LOG%
 whoami >> %LOG%
 

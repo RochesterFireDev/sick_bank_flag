@@ -15,6 +15,7 @@ __pycache__/
 *.log
 *.xlsx
 *.tmp
+*.vscode
 
 # Ignore scratch/test scripts
 *test.py
